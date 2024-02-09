@@ -1,2 +1,2 @@
 # Course
-[FreeCodeCamp](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/)
+Course material from [FreeCodeCamp's](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/) certification program
