@@ -1,2 +1,2 @@
-# JavaScript Algorithms And Data Structures
- Course material from FreeCodeCamp's certification program
+# Course
+From [FreeCodeCamp's](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures-v8/) certification program...
