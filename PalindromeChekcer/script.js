@@ -1,15 +1,19 @@
 const checkButton = document.getElementById("check-btn");
-
 const textInput = document.getElementById("text-input");
-
 const result = document.getElementById("result");
 
-checkButton.addEventListener("click", () => {
-  if (textInput.value.length === 0) {
-    return alert("Please input a value")
-  }
-});
+const checkText = () => {
+  const regex = /[\s-_\.,:)\(\]\[\/\\|{}!@#$%^&*+"'<>?`~]/g
+  const regText = textInput.value.replace(regex, "").toLowerCase();
+  const revText = textInput.value.split("").reverse().join("").replace(regex, "").toLowerCase();
 
-checkButton.addEventListener("click", () => {
-  textInput.value === textInput.value.split("").reverse().join("") ? console.log(`${textInput.value} is a palindrome`) : console.log(`${textInput.value} is not a palindrome`);
-});
+  if (textInput.value.length === 0) {
+    return alert("Please input a value");
+  } else if (regText === revText) {
+    return result.innerHTML = `<span><b>${textInput.value}</b> is a palindrome!<span/>`;
+  } else {
+    return result.innerHTML = `<span><b>${textInput.value}</b> is not a palindrome!<span/>`;
+  }
+};
+
+checkButton.addEventListener("click", checkText);
