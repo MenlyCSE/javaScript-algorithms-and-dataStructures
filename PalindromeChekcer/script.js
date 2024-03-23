@@ -11,7 +11,5 @@ checkButton.addEventListener("click", () => {
 });
 
 checkButton.addEventListener("click", () => {
-  if (textInput.value.length === 1) {
-    console.log(`${textInput.value} is a palindrome`)
-  }
+  textInput.value === textInput.value.split("").reverse().join("") ? console.log(`${textInput.value} is a palindrome`) : console.log(`${textInput.value} is not a palindrome`);
 });
