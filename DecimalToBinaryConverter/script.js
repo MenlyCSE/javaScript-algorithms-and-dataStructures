@@ -3,22 +3,35 @@ const convertBtn = document.getElementById("convert-btn");
 const result = document.getElementById("result");
 
 const decimalToBinary = (input) => {
-  if (input === 0) {
-    return "0";
-  } 
-  
-  else {
+  if (input === 0 || input === 1) {
+    return String(input);
+  } else {
     return decimalToBinary(Math.floor(input / 2)) + (input % 2);
   }
 };
 
+const showAnimation = () => {
+
+  setTimeout(() => {
+    console.log("Code");
+  }, 1000);
+  console.log("Camp");
+};
+
 const checkUserInput = () => {
-  if (!numberInput.value || isNaN(parseInt(numberInput.value))) {
+  const inputInt = parseInt(numberInput.value);
+
+  if (!numberInput.value || isNaN(inputInt)) {
     alert("Please provide a decimal number");
     return;
   }
 
-  result.textContent = decimalToBinary(parseInt(numberInput.value));
+  if (inputInt === 5) {
+    showAnimation();
+    return;
+  }
+
+  result.textContent = decimalToBinary(inputInt);
   numberInput.value = "";
 };
 
