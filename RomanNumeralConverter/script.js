@@ -11,6 +11,14 @@ const inputChecker = () => {
   } else if (userInput.value >= 4000) {
     output.innerHTML = "Please enter a number less than or equal to 3999";
   }
+
+
+  for (const value of userInput.value) {
+    if (value === '1') {
+      output.innerHTML = "I"
+    }
+  }
+
 }
 
 
