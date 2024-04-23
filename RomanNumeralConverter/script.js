@@ -13,30 +13,19 @@ const inputChecker = () => {
   }
 
   const romans = {
-    1000:'M',
-    900:'CM',
-    500:'D',
-    400:'CD',
-    100:'C',
-    90:'XC',
-    50:'L',
-    40:'XL',
-    10:'X',
-    9:'IX',
-    5:'V',
-    4:'IV',
-    1:'I'
+    '1':'I',
+    '4':'IV',
+    '5':'V'
   }
 
-  if (userInput.value.includes(romans.value)) {
-    output.innerHTML = romans.numeral;
+  if (userInput.value.includes('1')) {
+    output.innerHTML = romans['1'];
   }
-
-
-  convertBtn.addEventListener('click', inputChecker)
-  userInput.addEventListener('keydown', (e) => {
-    if (e.key === "Enter") {
-      inputChecker();
-    }
-  })
 }
+
+convertBtn.addEventListener('click', inputChecker)
+userInput.addEventListener('keydown', (e) => {
+  if (e.key === "Enter") {
+    inputChecker();
+  }
+})
