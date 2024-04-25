@@ -11,16 +11,44 @@ const inputChecker = () => {
   } else if (userInput.value >= 4000) {
     output.innerHTML = "Please enter a number less than or equal to 3999";
   }
+}
 
-  const romans = {
-    '1':'I',
-    '4':'IV',
-    '5':'V'
+const convertToRoman = (num) => {
+   // keys
+  const romanLookUp = {
+    M:1000,
+    CM:900,
+    D:500,
+    CD:400,
+    C:100,
+    XC:90,
+    L:50,
+    XL:40,
+    X:10,
+    IX:9,
+    V:5,
+    IV:4,
+    I:1
   }
 
-  if (userInput.value.includes('1')) {
-    output.innerHTML = romans['1'];
+  // currentUserInput
+  const currentNumber = '';
+
+  // accumalator
+  const accumalator = '';
+
+
+  // loop through keys
+  while (currentNumber <= num) {
+    num - currentNumber;
+
   }
+
+  // while currentNumber <= num then subtract currentNumber from num. Add symbol to accumulator.
+
+
+  // produce values
+  return num;
 }
 
 convertBtn.addEventListener('click', inputChecker)
