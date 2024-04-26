@@ -14,6 +14,7 @@ const inputChecker = () => {
 }
 
 const convertToRoman = (num) => {
+
    // keys
   const romanLookUp = {
     M:1000,
@@ -31,25 +32,24 @@ const convertToRoman = (num) => {
     I:1
   }
 
-  // currentUserInput
-  const currentNumber = '';
-
   // accumalator
-  const accumalator = '';
-
+  let accumalator = '';
 
   // loop through keys
-  while (currentNumber <= num) {
-    num - currentNumber;
-
+  for (const key in romanLookUp) {
+    const numberValue = romanLookUp[key]
+    
+    while (numberValue <= num) {
+      num -= numberValue;
+      accumalator += key;
+    }
   }
 
-  // while currentNumber <= num then subtract currentNumber from num. Add symbol to accumulator.
-
-
   // produce values
-  return num;
+  return accumalator;
 }
+
+convertToRoman();
 
 convertBtn.addEventListener('click', inputChecker)
 userInput.addEventListener('keydown', (e) => {
