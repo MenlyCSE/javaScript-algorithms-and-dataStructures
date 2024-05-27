@@ -31,7 +31,17 @@ const spreadsheetFunctions = {
   average,
   median,
   even: nums => nums.filter(isEven),
-
+  firsttwo: nums => nums.slice(0, 2),
+  lasttwo: nums => nums.slice(-2),
+  has2: nums => nums.includes(2) ?  true : false,
+  increment: nums => {
+  for (let value of nums) {
+    const x = 1;
+    value += x;
+    console.log(nums);
+  }
+  return nums
+  },
 }
 
 const applyFunction = str => {
