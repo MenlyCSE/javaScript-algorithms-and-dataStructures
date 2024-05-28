@@ -27,21 +27,21 @@ const median = nums => {
 }
 
 const spreadsheetFunctions = {
+  
   sum,
   average,
   median,
   even: nums => nums.filter(isEven),
+  someeven: nums => nums.some(isEven),
+  everyeven: nums => nums.every(isEven),
   firsttwo: nums => nums.slice(0, 2),
   lasttwo: nums => nums.slice(-2),
-  has2: nums => nums.includes(2) ?  true : false,
-  increment: nums => {
-  for (let value of nums) {
-    const x = 1;
-    value += x;
-    console.log(nums);
-  }
-  return nums
-  },
+  has2: nums => nums.includes(2),
+  increment: nums => nums.map(num => num + 1),
+  random: ([x, y]) => Math.floor(Math.random() * y + x),
+  range: nums => range(...nums),
+  nodupes: nums => [...new Set(nums).values()],
+  "": nums => nums,
 }
 
 const applyFunction = str => {
