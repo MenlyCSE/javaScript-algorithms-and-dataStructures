@@ -4,26 +4,28 @@ const clearBtn = document.getElementById('clear-btn');
 const resultsDiv = document.getElementById('results-div');
 
 
+// clearBtn validations
+const clearBtnChecker = () => {
+  resultsDiv.innerHTML = '';
+}
+
+
 // checkBtn validations
 const checkBtnChecker = () => {
-  const regex = /([1])?([\d\s-)()]+)/g;
+  const regex = /([1])?[0-9\)\(\s]/g;
+
+  const regexRes = regex.test(userInput.value);
 
   if (!userInput.value) {
     return alert('Please provide a phone number')
   }
 
-  if (userInput) {
-    resultsDiv.value = 'Valid US number: 1 555-555-5555';
-    console.log(resultsDiv.value);
-    console.log(regex.test(userInput.value));
+  if (regexRes === true) {
+    resultsDiv.value = `Valid US number: ${userInput.value}`;
+    console.log(resultsDiv.value)
+  } else {
+    console.log('No...', regexRes)
   }
-}
-
-
-// clearBtn validations
-const clearBtnChecker = () => {
-  resultsDiv.value = '';
-  console.log(resultsDiv);
 }
 
 
