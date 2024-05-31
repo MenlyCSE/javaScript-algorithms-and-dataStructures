@@ -12,7 +12,7 @@ const clearBtnChecker = () => {
 
 // checkBtn validations
 const checkBtnChecker = () => {
-  const regex = /([1])?[0-9\)\(\s]/g;
+  const regex = /[\d]{0,2}?[\d]{10,10}/g;
 
   const regexRes = regex.test(userInput.value);
 
@@ -21,10 +21,11 @@ const checkBtnChecker = () => {
   }
 
   if (regexRes === true) {
-    resultsDiv.value = `Valid US number: ${userInput.value}`;
-    console.log(resultsDiv.value)
-  } else {
-    console.log('No...', regexRes)
+    resultsDiv.innerHTML = `Valid US number: ${userInput.value}`;
+    console.log(resultsDiv.innerHTML)
+  } else if (regexRes === false) {
+    resultsDiv.innerHTML = `Invalid US number: ${userInput.value}`;
+    console.log(resultsDiv.innerHTML)
   }
 }
 
