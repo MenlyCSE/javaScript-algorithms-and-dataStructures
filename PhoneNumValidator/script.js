@@ -12,19 +12,21 @@ const clearBtnChecker = () => {
 
 // checkBtn validations
 const checkBtnChecker = () => {
-  const regex = /[\d]{0,2}?[\d]{10,10}/g;
+  const regex = /^(\d)?(\d{3})(\d{3})(\d{4})$/;
 
-  const regexRes = regex.test(userInput.value);
-
+  // missing input 
   if (!userInput.value) {
     return alert('Please provide a phone number')
   }
 
-  if (regexRes === true) {
+  // valid number
+  if (regex.test(userInput.value)) {
     resultsDiv.innerHTML = `Valid US number: ${userInput.value}`;
-    console.log(resultsDiv.innerHTML)
-  } else if (regexRes === false) {
+
+    console.log(resultsDiv.innerHTML);
+  } else {
     resultsDiv.innerHTML = `Invalid US number: ${userInput.value}`;
+
     console.log(resultsDiv.innerHTML)
   }
 }
