@@ -14,7 +14,7 @@ const clearBtnChecker = () => {
 const checkBtnChecker = () => {
   const regexT = /^(1)?(\s)?(\()?(\d{3})(-)?(\))?(\s)?(\d{3})(-)?(\s)?(\d{4})$/;
 
-  const regex = /^(1)?([\(\)]{2})?\d{4}$/
+  const regex = /^(1)?\d{3}([\(\)]{2})?\d{4}$/
 
   // missing input 
   if (!userInput.value) {
