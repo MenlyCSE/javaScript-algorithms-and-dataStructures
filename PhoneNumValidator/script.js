@@ -12,9 +12,10 @@ const clearBtnChecker = () => {
 
 // checkBtn validations
 const checkBtnChecker = () => {
-  const regexT = /^(1)?(\s)?(\()?(\d{3})(-)?(\))?(\s)?(\d{3})(-)?(\s)?(\d{4})$/;
 
-  const regex = /^(1)?([\(]?\d{3}[-]?[\)]?)\d{4}$/
+  // I used the OR operator in this regex... 
+  // this gave me a good visual while buildign: https://ihateregex.io/expr/phone/
+  const regex = /^(1)?(([ ]?[-]?[(][\d]{3}[)][-]?[ ]?)|([ ]?[-]?[\d]{3}[-]?[ ]?))[\d]{3}[-]?[ ]?[\d]{4}$/
 
   // missing input 
   if (!userInput.value) {
