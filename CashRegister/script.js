@@ -1,3 +1,7 @@
+const input = document.getElementById('cash');
+const changeDue = document.getElementById('changeDue');
+const purchaseBtn = document.getElementById('purchase-btn');
+
 let price = 1.87;
 let cid = [
   ["PENNY", 1.01],
@@ -10,3 +14,4 @@ let cid = [
   ["TWENTY", 60],
   ["ONE HUNDRED", 100]
 ];
+
