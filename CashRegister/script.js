@@ -1,8 +1,10 @@
 const cash = document.getElementById('cash');
-const changeDue = document.getElementById('changeDue');
+const changeDue = document.getElementById('change-due');
 const purchaseBtn = document.getElementById('purchase-btn');
 
 let price = 1.87;
+
+// cash in drawer
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -15,13 +17,15 @@ let cid = [
   ["ONE HUNDRED", 100]
 ];
 
+console.log(cid[0][1])
+
 const validator = () => {
   if (cash.value < price) {
     alert("Customer does not have enough money to purchase the item");
   };
 
-  if (cash.value == price) {
-    console.log(changeDue.value)
+  if (parseFloat(cash.value) === price) {
+    changeDue.innerHTML = "No change due - customer paid with exact cash";
   }
 };
 
