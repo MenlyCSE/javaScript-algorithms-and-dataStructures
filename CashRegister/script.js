@@ -1,4 +1,4 @@
-const input = document.getElementById('cash');
+const cash = document.getElementById('cash');
 const changeDue = document.getElementById('changeDue');
 const purchaseBtn = document.getElementById('purchase-btn');
 
@@ -15,3 +15,14 @@ let cid = [
   ["ONE HUNDRED", 100]
 ];
 
+const validator = () => {
+  if (cash.value < price) {
+    alert("Customer does not have enough money to purchase the item");
+  };
+
+  if (cash.value == price) {
+    console.log(changeDue.value)
+  }
+};
+
+purchaseBtn.addEventListener('click', validator);
