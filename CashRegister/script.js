@@ -3,6 +3,7 @@ const changeDue = document.getElementById('change-due');
 const purchaseBtn = document.getElementById('purchase-btn');
 
 let price = 1.87;
+let leftover = price 
 
 // cash in drawer
 let cid = [
@@ -20,7 +21,7 @@ let cid = [
 console.log(cid[0][1])
 
 const validator = () => {
-  if (cash.value < price) {
+  if (parseFloat(cash.value) < price) {
     alert("Customer does not have enough money to purchase the item");
   };
 
@@ -29,4 +30,5 @@ const validator = () => {
   }
 };
 
+// calls validator
 purchaseBtn.addEventListener('click', validator);
