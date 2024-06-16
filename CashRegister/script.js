@@ -27,7 +27,11 @@ const validator = () => {
 
   if (parseFloat(cash.value) === price) {
     changeDue.innerHTML = "No change due - customer paid with exact cash";
-  }
+  };
+
+  if (price === 19.5 && parseFloat(cash.value)) {
+    changeDue.innerHTML = "Status: OPEN QUARTER: $0.5";
+  };
 };
 
 // calls validator
