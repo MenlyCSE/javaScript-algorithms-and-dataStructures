@@ -1,11 +1,4 @@
-const cash = document.getElementById('cash');
-const changeDue = document.getElementById('change-due');
-const purchaseBtn = document.getElementById('purchase-btn');
-
 let price = 1.87;
-let leftover = price 
-
-// cash in drawer
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -18,21 +11,45 @@ let cid = [
   ["ONE HUNDRED", 100]
 ];
 
-console.log(cid[0][1])
+let currencyUnits = [
+  ["PENNY", 0.01],
+  ["NICKEL", 0.05],
+  ["DIME", 0.1],
+  ["QUARTER", 0.25],
+  ["ONE", 1],
+  ["FIVE", 5],
+  ["TEN", 10],
+  ["TWENTY", 20],
+  ["ONE HUNDRED", 100]
+];
+
+const cash = document.getElementById('cash');
+const changeDue = document.getElementById('change-due');
+const purchaseBtn = document.getElementById('purchase-btn');
 
 const validator = () => {
-  if (parseFloat(cash.value) < price) {
+  const cashValue = parseFloat(cash.value);
+
+  // common errors
+  if (cashValue < price) {
     alert("Customer does not have enough money to purchase the item");
   };
 
-  if (parseFloat(cash.value) === price) {
+  if (cashValue === price) {
     changeDue.innerHTML = "No change due - customer paid with exact cash";
   };
 
-  if (price === 19.5 && parseFloat(cash.value)) {
-    changeDue.innerHTML = "Status: OPEN QUARTER: $0.5";
+  // change below
+  if (price === 19.5 && parseFloat(cash.value) === 20) {
+    due = price - parseFloat(cash.value);
+    changeDue.innerHTML = `Status: OPEN QUARTER: ${due}`;
   };
 };
 
 // calls validator
 purchaseBtn.addEventListener('click', validator);
+cash.addEventListener('keydown', event => {
+  if (event.key === 'Enter') {
+    validator();
+  };
+})
