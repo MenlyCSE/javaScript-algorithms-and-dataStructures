@@ -49,6 +49,9 @@ const validator = () => {
     changeDue.innerHTML += "Status: OPEN <br/>";
     totalCashInDrawer - price; // edit later
 
+    // iterate through cid...
+    // if an element inside cid is greater than the change due...
+    // subtract it and return the cid
 
   } else if (totalCashInDrawer === leftOverCash) {
     changeDue.innerHTML += "Status: CLOSED <br/>";
