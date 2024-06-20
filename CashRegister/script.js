@@ -28,21 +28,41 @@ const changeDue = document.getElementById('change-due');
 const purchaseBtn = document.getElementById('purchase-btn');
 
 const validator = () => {
+  // how much $ buyer user has
   const cashValue = parseFloat(cash.value);
 
-  // common errors
+  // based on what user gives, provide leftovers
+  const leftOverCash = cashValue - price;
+
+  // iterating through cash-in-drawer (cid)
+  let totalCashInDrawer = 0;
+  cid.forEach((element) => {
+    totalCashInDrawer += element[1];
+  });
+
+  // note: change cid after subtracting price
+
+  // is there enough in cid to give change?
+  if (totalCashInDrawer < leftOverCash) {
+    changeDue.innerHTML += "Status: INSUFFICIENT_FUNDS <br/>";
+  } else if (totalCashInDrawer > leftOverCash) {
+    changeDue.innerHTML += "Status: OPEN <br/>";
+    totalCashInDrawer - price; // edit later
+
+
+  } else if (totalCashInDrawer === leftOverCash) {
+    changeDue.innerHTML += "Status: CLOSED <br/>";
+  }
+
+  // edge cases
   if (cashValue < price) {
     alert("Customer does not have enough money to purchase the item");
+    return;
   };
 
   if (cashValue === price) {
-    changeDue.innerHTML = "No change due - customer paid with exact cash";
-  };
-
-  // change below
-  if (price === 19.5 && parseFloat(cash.value) === 20) {
-    due = price - parseFloat(cash.value);
-    changeDue.innerHTML = `Status: OPEN QUARTER: ${due}`;
+    changeDue.innerHTML += "No change due - customer paid with exact cash";
+    return;
   };
 };
 
