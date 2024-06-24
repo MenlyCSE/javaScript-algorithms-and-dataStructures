@@ -47,11 +47,14 @@ const validator = () => {
     changeDue.innerHTML += "Status: INSUFFICIENT_FUNDS <br/>";
   } else if (totalCashInDrawer > leftOverCash) {
     changeDue.innerHTML += "Status: OPEN <br/>";
-    totalCashInDrawer - price; // edit later
 
-    // iterate through cid...
-    // if an element inside cid is greater than the change due...
-    // subtract it and return the cid
+    cid.forEach((element) => {
+      if (price < element[1]) {
+        element[1] -= price;
+        return;
+      }
+    })
+    changeDue.innerHTML += `${totalCashInDrawer.toFixed(2)} <br/>`;
 
   } else if (totalCashInDrawer === leftOverCash) {
     changeDue.innerHTML += "Status: CLOSED <br/>";
