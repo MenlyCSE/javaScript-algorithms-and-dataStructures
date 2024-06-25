@@ -11,6 +11,7 @@ let cid = [
   ["ONE HUNDRED", 100]
 ];
 
+
 let currencyUnits = [
   ["PENNY", 0.01],
   ["NICKEL", 0.05],
@@ -27,7 +28,61 @@ const cash = document.getElementById('cash');
 const changeDue = document.getElementById('change-due');
 const purchaseBtn = document.getElementById('purchase-btn');
 
+
+// update: the goal is to take everything from one category
+// e.g., customer gives 100 for a $5 item...
+
+// assuming the cid looks like this: 
+// [
+//   ["PENNY", 1.01],
+//   ["NICKEL", 2.05],
+//   ["DIME", 3.1],
+//   ["QUARTER", 4.25],
+//   ["ONE", 90],
+//   ["FIVE", 55],
+//   ["TEN", 20],
+//   ["TWENTY", 60],
+//   ["ONE HUNDRED", 100]
+// ]
+
+// the change will be: [$60 from "TWENTY"], [$20 from "TWENTY"], [$15 from "TWENTY"]
+// and the output would only show subtracts from these three categories
+
+
 const validator = () => {
+  const customerCash = parseFloat(cash.value);
+
+  let i = 0;
+  cid.forEach((element) => {
+    // checks for unit (e.g, penny)
+    if (element[0] === currencyUnits[i][0]) {
+      console.log(currencyUnits[i][0]);
+    }
+    i++;
+  });
+
+
+  // edge cases
+  if (customerCash < price) {
+    alert("Customer does not have enough money to purchase the item");
+    return;
+  };
+
+  if (customerCash === price) {
+    changeDue.innerHTML += "No change due - customer paid with exact cash";
+    return;
+  };
+}
+
+
+
+
+
+
+
+
+// outdated
+const validator1 = () => {
   // how much $ buyer user has
   const cashValue = parseFloat(cash.value);
 
@@ -44,20 +99,21 @@ const validator = () => {
 
   // is there enough in cid to give change?
   if (totalCashInDrawer < leftOverCash) {
-    changeDue.innerHTML += "Status: INSUFFICIENT_FUNDS <br/>";
+    change.innerHTML += "Status: INSUFFICIENT_FUNDS <br/>";
   } else if (totalCashInDrawer > leftOverCash) {
-    changeDue.innerHTML += "Status: OPEN <br/>";
+    change.innerHTML += "Status: OPEN <br/>";
 
     cid.forEach((element) => {
       if (price < element[1]) {
         element[1] -= price;
         return;
       }
+      change.innerHTML += `${cid[1][0]}: ${totalCashInDrawer.toFixed(2)} <br/>`;
     })
-    changeDue.innerHTML += `${totalCashInDrawer.toFixed(2)} <br/>`;
+
 
   } else if (totalCashInDrawer === leftOverCash) {
-    changeDue.innerHTML += "Status: CLOSED <br/>";
+    change.innerHTML += "Status: CLOSED <br/>";
   }
 
   // edge cases
@@ -71,6 +127,15 @@ const validator = () => {
     return;
   };
 };
+
+
+
+
+
+
+
+
+
 
 // calls validator
 purchaseBtn.addEventListener('click', validator);
