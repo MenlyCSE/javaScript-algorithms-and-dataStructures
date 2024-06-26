@@ -52,13 +52,20 @@ const purchaseBtn = document.getElementById('purchase-btn');
 const validator = () => {
   const customerCash = parseFloat(cash.value);
 
-  let i = 0;
+  // I want to take what the customer gave me... ^
+  // go through my register... ^ 
+  // and take away the price of the item
+  // ...from what the customer gave me
+
+
   cid.forEach((element) => {
-    // checks for unit (e.g, penny)
-    if (element[0] === currencyUnits[i][0]) {
-      console.log(currencyUnits[i][0]);
+    if (element[1][1] > price) {
+      console.log(element[1][1]);
+
+
+      // takes away price from register
+      price - element[1][1];
     }
-    i++;
   });
 
 
@@ -73,68 +80,6 @@ const validator = () => {
     return;
   };
 }
-
-
-
-
-
-
-
-
-// outdated
-const validator1 = () => {
-  // how much $ buyer user has
-  const cashValue = parseFloat(cash.value);
-
-  // based on what user gives, provide leftovers
-  const leftOverCash = cashValue - price;
-
-  // iterating through cash-in-drawer (cid)
-  let totalCashInDrawer = 0;
-  cid.forEach((element) => {
-    totalCashInDrawer += element[1];
-  });
-
-  // note: change cid after subtracting price
-
-  // is there enough in cid to give change?
-  if (totalCashInDrawer < leftOverCash) {
-    change.innerHTML += "Status: INSUFFICIENT_FUNDS <br/>";
-  } else if (totalCashInDrawer > leftOverCash) {
-    change.innerHTML += "Status: OPEN <br/>";
-
-    cid.forEach((element) => {
-      if (price < element[1]) {
-        element[1] -= price;
-        return;
-      }
-      change.innerHTML += `${cid[1][0]}: ${totalCashInDrawer.toFixed(2)} <br/>`;
-    })
-
-
-  } else if (totalCashInDrawer === leftOverCash) {
-    change.innerHTML += "Status: CLOSED <br/>";
-  }
-
-  // edge cases
-  if (cashValue < price) {
-    alert("Customer does not have enough money to purchase the item");
-    return;
-  };
-
-  if (cashValue === price) {
-    changeDue.innerHTML += "No change due - customer paid with exact cash";
-    return;
-  };
-};
-
-
-
-
-
-
-
-
 
 
 // calls validator
