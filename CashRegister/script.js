@@ -11,7 +11,6 @@ let cid = [
   ["ONE HUNDRED", 100]
 ];
 
-
 let currencyUnits = [
   ["PENNY", 0.01],
   ["NICKEL", 0.05],
@@ -52,33 +51,33 @@ const purchaseBtn = document.getElementById('purchase-btn');
 const validator = () => {
   const customerCash = parseFloat(cash.value);
 
+  // edge cases
+  if (customerCash < price) {
+    alert("Customer does not have enough money to purchase the item");
+    return;
+  } else if (customerCash === price) {
+    changeDue.innerHTML += "No change due - customer paid with exact cash";
+  }
+
   // I want to take what the customer gave me... ^
   // go through my register... ^ 
   // and take away the price of the item
   // ...from what the customer gave me
 
-
-  cid.forEach((element) => {
-    if (element[1][1] > price) {
-      console.log(element[1][1]);
-
-
-      // takes away price from register
-      price - element[1][1];
+  let i = 0;
+  while (cid[i][i] > price) {
+    while (cid[i][i] < price && i < cid.length) {
+      i++;
     }
-  });
 
+    const update = cid[i][i] - price;
+    const updateVal = update.toFixed(2);
+    cid[i][i] = updateVal;
+    console.log(`SUBTRACTED ${price} from ${cid[i][i - 1]}`)
+  }
 
-  // edge cases
-  if (customerCash < price) {
-    alert("Customer does not have enough money to purchase the item");
-    return;
-  };
-
-  if (customerCash === price) {
-    changeDue.innerHTML += "No change due - customer paid with exact cash";
-    return;
-  };
+  // test
+  console.log(cid);
 }
 
 
