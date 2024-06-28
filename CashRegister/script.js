@@ -1,4 +1,4 @@
-let price = 1.87;
+let price = 90.27;
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -26,54 +26,32 @@ let currencyUnits = [
 const cash = document.getElementById('cash');
 const changeDue = document.getElementById('change-due');
 const purchaseBtn = document.getElementById('purchase-btn');
-
-
-// update: the goal is to take everything from one category
-// e.g., customer gives 100 for a $5 item...
-
-// assuming the cid looks like this: 
-// [
-//   ["PENNY", 1.01],
-//   ["NICKEL", 2.05],
-//   ["DIME", 3.1],
-//   ["QUARTER", 4.25],
-//   ["ONE", 90],
-//   ["FIVE", 55],
-//   ["TEN", 20],
-//   ["TWENTY", 60],
-//   ["ONE HUNDRED", 100]
-// ]
-
-// the change will be: [$60 from "TWENTY"], [$20 from "TWENTY"], [$15 from "TWENTY"]
-// and the output would only show subtracts from these three categories
-
+const customerCash = parseFloat(cash.value);
 
 const validator = () => {
-  const customerCash = parseFloat(cash.value);
 
-  // edge cases
-  if (customerCash < price) {
-    alert("Customer does not have enough money to purchase the item");
-    return;
-  } else if (customerCash === price) {
-    changeDue.innerHTML += "No change due - customer paid with exact cash";
-  }
-
-  // I want to take what the customer gave me... ^
-  // go through my register... ^ 
-  // and take away the price of the item
-  // ...from what the customer gave me
-
-  let i = 0;
-  while (cid[i][i] > price) {
-    while (cid[i][i] < price && i < cid.length) {
-      i++;
+  // loop through cid
+  for (let i = 0; i < cid.length; i++) {
+    if (cid[i][1] > price && price > 0) {
+      let updateCid = cid[i][1] - price;
+      cid[i][1] = updateCid.toFixed(2);
+      console.log(`SUBTRACTED ${price.toFixed(2)} from ${cid[i][0]}`)
+      price -= cid[i][1] // updates price
     }
+    
+    // what if the price is something like 150? 
+    // I need a way to take portions of each value
+    // I am going to find out...
+    // I already did a good job making this loop :)
 
-    const update = cid[i][i] - price;
-    const updateVal = update.toFixed(2);
-    cid[i][i] = updateVal;
-    console.log(`SUBTRACTED ${price} from ${cid[i][i - 1]}`)
+    // edge cases
+    if (customerCash < price) {
+      alert("Customer does not have enough money to purchase the item");
+      return;
+    } else if (customerCash === price) {
+      changeDue.innerHTML += "No change due - customer paid with exact cash";
+      return;
+    }
   }
 
   // test
