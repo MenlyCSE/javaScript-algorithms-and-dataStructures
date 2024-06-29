@@ -1,4 +1,4 @@
-let price = 90.27;
+let price = 19.5;
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -26,23 +26,21 @@ let currencyUnits = [
 const cash = document.getElementById('cash');
 const changeDue = document.getElementById('change-due');
 const purchaseBtn = document.getElementById('purchase-btn');
-const customerCash = parseFloat(cash.value);
 
 const validator = () => {
+  const customerCash = parseFloat(cash.value);
+  let customerChange = cash.value - price;
 
-  // loop through cid
-  for (let i = 0; i < cid.length; i++) {
-    if (cid[i][1] > price && price > 0) {
-      let updateCid = cid[i][1] - price;
+  // loop through cid from top to bottom
+  for (let i = cid.length - 1; i > 0; i--) {
+    if (cid[i][1] > customerChange && customerChange > 0) {
+      let updateCid = cid[i][1] - customerChange;
       cid[i][1] = updateCid.toFixed(2);
-      console.log(`SUBTRACTED ${price.toFixed(2)} from ${cid[i][0]}`)
-      price -= cid[i][1] // updates price
+      console.log(`SUBTRACTED ${customerChange.toFixed(2)} from ${cid[i][0]}`)
+      customerChange -= cid[i][1] // updates price
     }
-    
-    // what if the price is something like 150? 
-    // I need a way to take portions of each value
-    // I am going to find out...
-    // I already did a good job making this loop :)
+
+    // Now, I can make it match the units
 
     // edge cases
     if (customerCash < price) {
@@ -52,6 +50,11 @@ const validator = () => {
       changeDue.innerHTML += "No change due - customer paid with exact cash";
       return;
     }
+
+    let dummyPrice = 25;
+    let cidCopy = cid;
+    let transUnits = (cidCopy[i][1] / currencyUnits[i][1]) - dummyPrice;
+    console.log(`${transUnits}`);
   }
 
   // test
