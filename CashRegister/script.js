@@ -11,7 +11,7 @@ let cid = [
   ["ONE HUNDRED", 100]
 ];
 
-let currencyUnits = [
+let unit = [
   ["PENNY", 0.01],
   ["NICKEL", 0.05],
   ["DIME", 0.1],
@@ -30,17 +30,21 @@ const purchaseBtn = document.getElementById('purchase-btn');
 const validator = () => {
   const customerCash = parseFloat(cash.value);
   let customerChange = cash.value - price;
+  console.log(`Customer's change: ${customerChange}`); // show before results
 
-  // loop through cid from top to bottom
-  for (let i = cid.length - 1; i > 0; i--) {
-    if (cid[i][1] > customerChange && customerChange > 0) {
-      let updateCid = cid[i][1] - customerChange;
-      cid[i][1] = updateCid.toFixed(2);
-      console.log(`SUBTRACTED ${customerChange.toFixed(2)} from ${cid[i][0]}`)
-      customerChange -= cid[i][1] // updates price
+  for (let i = cid.length - 1; i >= 0; i--) {
+    // acknowledge the increments
+    if (cid[i][1] - unit[i][1] > customerChange && customerChange > 0) {
+      cid[i][1] -= unit[i][1]; // update cid
+      customerChange -= unit[i][1] // update customer change
+      console.log(`cycle ${i}: -${unit[i][1]} from ${cid[i][0]}`) // results
     }
 
-    // Now, I can make it match the units
+    // break the loop if things are accounted for
+    if (customerChange < unit[0][1]) {
+      console.log('Everything is accounted for!')
+      break;
+    }
 
     // edge cases
     if (customerCash < price) {
@@ -50,11 +54,6 @@ const validator = () => {
       changeDue.innerHTML += "No change due - customer paid with exact cash";
       return;
     }
-
-    let dummyPrice = 25;
-    let cidCopy = cid;
-    let transUnits = (cidCopy[i][1] / currencyUnits[i][1]) - dummyPrice;
-    console.log(`${transUnits}`);
   }
 
   // test
