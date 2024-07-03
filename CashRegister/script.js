@@ -29,23 +29,23 @@ const purchaseBtn = document.getElementById('purchase-btn');
 
 const validator = () => {
   const customerCash = parseFloat(cash.value);
-  let customerChange = cash.value - price;
+  let customerChange = (cash.value - price);
   console.log(`Customer's change: ${customerChange}`); // show before results
 
-  for (let i = cid.length - 1; i >= 0; i--) {
-    // acknowledge the increments
-    if (cid[i][1] - unit[i][1] > customerChange && customerChange > 0) {
+  // acknowledge the increments
+  for (let i = cid.length - 1; i >= 0; i+0) {
+    if (unit[i][1] <= customerChange && customerChange > 0 && cid[i][1] > 0) { 
       cid[i][1] -= unit[i][1]; // update cid
       customerChange -= unit[i][1] // update customer change
       console.log(`cycle ${i}: -${unit[i][1]} from ${cid[i][0]}`) // results
+    } else if (customerChange < 0.01 && customerChange > 0 && cid[i][1] > 0) {
+      cid[i][1] -= unit[i][1]; // update cid
+      customerChange = 0;
+      console.log(`cycle ${i}: -${unit[i][1]} from ${cid[i][0]}`) // results
+    } else {
+      i--;
     }
-
-    // break the loop if things are accounted for
-    if (customerChange < unit[0][1]) {
-      console.log('Everything is accounted for!')
-      break;
-    }
-
+    
     // edge cases
     if (customerCash < price) {
       alert("Customer does not have enough money to purchase the item");
@@ -56,7 +56,7 @@ const validator = () => {
     }
   }
 
-  // test
+  // show cid
   console.log(cid);
 }
 
