@@ -40,28 +40,39 @@ const changeDue = document.getElementById('change-due');
 const purchaseBtn = document.getElementById('purchase-btn');
 
 const validator = () => {
+  const status = ["OPEN", "CLOSED", "INSUFFICIENT_FUNDS"];
   const customerCash = parseFloat(cash.value);
-  let customerChange = (cash.value - price);
+  let customerChange = customerCash - price;
+  let total = 0;
+
+  // total cash-in-drawer
+  for (let i = cid.length - 1; i >= 0; i--) {
+    total += cid[i][1];
+  };
+
+  // edge case messages
+  if (customerCash > total) {
+    changeDue.innerHTML += `<br />STATUS: ${status[2]}`; // not enough money in drawer
+  } else if (customerCash < price) {
+    changeDue.innerHTML += `<br />STATUS: ${status[1]}`; // customer not have enough money
+  } else {
+    changeDue.innerHTML += `<br />STATUS: ${status[0]}`; // customer needs some change
+  }
 
   // remove previous values
   const resetInterface = () => {
-    for (let i = allocation.length -1; i >= 0; i--) {
+    for (let i = allocation.length - 1; i >= 0; i--) {
       allocation[i][1] = 0;
     };
   };
 
   // acknowledge the increments
-  for (let i = cid.length - 1; i >= 0; i+0) {
-    if (unit[i][1] <= customerChange && customerChange > 0 && cid[i][1] > 0) { 
+  for (let i = cid.length - 1; i >= 0; i--) {
+    while (unit[i][1] <= customerChange && customerChange > 0 && cid[i][1] > 0) {
       cid[i][1] -= unit[i][1]; // update cid
       allocation[i][1] += unit[i][1]; // update interface
       customerChange -= unit[i][1] // update customer change
-    } else if (customerChange < 0.01 && customerChange > 0 && cid[i][1] > 0) {
-      cid[i][1] -= unit[i][1]; // update cid
-      allocation[i][1] += unit[i][1]; // update interface
-      customerChange = 0;
-    } else {
-      i--;
+      customerChange = parseFloat(customerChange.toFixed(2)); // round the values
     };
 
     // edge cases
@@ -69,24 +80,20 @@ const validator = () => {
       alert("Customer does not have enough money to purchase the item");
       return;
     } else if (customerCash === price) {
-      changeDue.innerHTML += "No change due - customer paid with exact cash";
+      changeDue.innerHTML += "<br /> No change due - customer paid with exact cash";
       return;
     };
   };
 
-  // display results
+  // display results when everything is accounted for
   if (customerChange === 0) {
-    for (let i = allocation.length -1; i >= 0; i--) {
+    for (let i = allocation.length - 1; i >= 0; i--) {
       if (allocation[i][1] > 0) {
-        // add a show status
-        changeDue.innerHTML += `<br />${allocation[i][0]}: ${allocation[i][1]}<br />`;
+        changeDue.innerHTML += `<br />${allocation[i][0]}: ${allocation[i][1]}`;
       };
     };
     resetInterface();
   };
-
-  // error check results
-  console.log(cid);
 };
 
 
