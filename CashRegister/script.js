@@ -51,7 +51,10 @@ const validator = () => {
   };
 
   // edge case messages
-  if (customerCash > total) {
+  if (customerCash < price) {
+    alert("Customer does not have enough money to purchase the item");
+    return;
+  } else if (customerCash > total) {
     changeDue.innerHTML = `<br />STATUS: ${status[2]}`; // not enough money in drawer
   } else if (customerCash < price) {
     changeDue.innerHTML = `<br />STATUS: ${status[1]}`; // customer not have enough money
@@ -59,11 +62,6 @@ const validator = () => {
     changeDue.innerHTML = `<br />STATUS: ${status[0]}`; // customer needs some change
   } else if (customerCash === price) {
     changeDue.innerHTML = "No change due - customer paid with exact cash";
-  };
-  
-  if (customerCash < price) {
-    alert("Customer does not have enough money to purchase the item");
-    return;
   };
 
   // remove previous values
