@@ -1,14 +1,14 @@
 let price = 19.5;
 let cid = [
-  ["PENNY", 1.01],
-  ["NICKEL", 2.05],
-  ["DIME", 3.1],
-  ["QUARTER", 4.25],
-  ["ONE", 90],
-  ["FIVE", 55],
-  ["TEN", 20],
-  ["TWENTY", 60],
-  ["ONE HUNDRED", 100]
+  ["PENNY", 0.5],
+  ["NICKEL", 0], 
+  ["DIME", 0], 
+  ["QUARTER", 0], 
+  ["ONE", 0], 
+  ["FIVE", 0], 
+  ["TEN", 0], 
+  ["TWENTY", 0], 
+  ["ONE HUNDRED", 0]
 ];
 
 let unit = [
@@ -52,17 +52,18 @@ const validator = () => {
 
   // edge case messages
   if (customerCash < price) {
+    changeDue.innerHTML = `STATUS: ${status[2]}`; // Not enough money from customer
     alert("Customer does not have enough money to purchase the item");
     return;
-  } else if (customerCash > total) {
-    changeDue.innerHTML = `STATUS: ${status[2]}`; // not enough money in drawer
-  } else if (customerCash < price) {
-    changeDue.innerHTML = `STATUS: ${status[1]}`; // customer not have enough money
-  } else if (customerCash > price) {
-    changeDue.innerHTML = `STATUS: ${status[0]}`; // customer needs some change
-  } else if (customerCash === price) {
+  } else if (total < customerChange) {
+    changeDue.innerHTML = `STATUS: ${status[2]}`; // Not enough money in drawer
+    return;
+  } else if (customerChange === 0) {
     changeDue.innerHTML = "No change due - customer paid with exact cash";
-  };
+    return;
+  } else {
+    changeDue.innerHTML = `STATUS: ${status[0]}`; // Customer needs some change
+  }
 
   // remove previous values
   const resetInterface = () => {
@@ -83,13 +84,26 @@ const validator = () => {
 
   // display results when everything is accounted for
   if (customerChange === 0) {
+    let totalInDrawer = 0;
+    for (let i = cid.length - 1; i >= 0; i--) {
+      totalInDrawer += cid[i][1];
+    };
+
+    if (totalInDrawer <= 0) {
+      changeDue.innerHTML = `STATUS: ${status[1]}`;
+    } else {
+      changeDue.innerHTML = `STATUS: ${status[0]}`;
+    };
+
     for (let i = allocation.length - 1; i >= 0; i--) {
       if (allocation[i][1] > 0) {
-        changeDue.innerHTML += `${allocation[i][0]}: $${allocation[i][1]}`;
+        changeDue.innerHTML += `<br>${allocation[i][0]}: $${allocation[i][1]}`;
       };
     };
-    resetInterface();
+  } else {
+    changeDue.innerHTML = `STATUS: ${status[2]}`; // Remaining change not possible
   };
+  resetInterface();
 };
 
 
