@@ -52,12 +52,19 @@ const validator = () => {
 
   // edge case messages
   if (customerCash > total) {
-    changeDue.innerHTML += `<br />STATUS: ${status[2]}`; // not enough money in drawer
+    changeDue.innerHTML = `<br />STATUS: ${status[2]}`; // not enough money in drawer
   } else if (customerCash < price) {
-    changeDue.innerHTML += `<br />STATUS: ${status[1]}`; // customer not have enough money
-  } else {
-    changeDue.innerHTML += `<br />STATUS: ${status[0]}`; // customer needs some change
-  }
+    changeDue.innerHTML = `<br />STATUS: ${status[1]}`; // customer not have enough money
+  } else if (customerCash > price) {
+    changeDue.innerHTML = `<br />STATUS: ${status[0]}`; // customer needs some change
+  } else if (customerCash === price) {
+    changeDue.innerHTML = "No change due - customer paid with exact cash";
+  };
+  
+  if (customerCash < price) {
+    alert("Customer does not have enough money to purchase the item");
+    return;
+  };
 
   // remove previous values
   const resetInterface = () => {
@@ -73,15 +80,6 @@ const validator = () => {
       allocation[i][1] += unit[i][1]; // update interface
       customerChange -= unit[i][1] // update customer change
       customerChange = parseFloat(customerChange.toFixed(2)); // round the values
-    };
-
-    // edge cases
-    if (customerCash < price) {
-      alert("Customer does not have enough money to purchase the item");
-      return;
-    } else if (customerCash === price) {
-      changeDue.innerHTML += "<br /> No change due - customer paid with exact cash";
-      return;
     };
   };
 
