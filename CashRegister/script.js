@@ -1,4 +1,4 @@
-let price = 3.26;
+let price = 19.5;
 let cid = [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -55,11 +55,11 @@ const validator = () => {
     alert("Customer does not have enough money to purchase the item");
     return;
   } else if (customerCash > total) {
-    changeDue.innerHTML = `<br />STATUS: ${status[2]}`; // not enough money in drawer
+    changeDue.innerHTML = `STATUS: ${status[2]}`; // not enough money in drawer
   } else if (customerCash < price) {
-    changeDue.innerHTML = `<br />STATUS: ${status[1]}`; // customer not have enough money
+    changeDue.innerHTML = `STATUS: ${status[1]}`; // customer not have enough money
   } else if (customerCash > price) {
-    changeDue.innerHTML = `<br />STATUS: ${status[0]}`; // customer needs some change
+    changeDue.innerHTML = `STATUS: ${status[0]}`; // customer needs some change
   } else if (customerCash === price) {
     changeDue.innerHTML = "No change due - customer paid with exact cash";
   };
@@ -85,7 +85,7 @@ const validator = () => {
   if (customerChange === 0) {
     for (let i = allocation.length - 1; i >= 0; i--) {
       if (allocation[i][1] > 0) {
-        changeDue.innerHTML += `<br />${allocation[i][0]}: ${allocation[i][1]}`;
+        changeDue.innerHTML += `${allocation[i][0]}: $${allocation[i][1]}`;
       };
     };
     resetInterface();
