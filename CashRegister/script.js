@@ -45,7 +45,7 @@ const validator = () => {
   let customerChange = customerCash - price;
   let total = 0;
 
-  // total cash-in-drawer
+  // total cash in drawer
   for (let i = cid.length - 1; i >= 0; i--) {
     total += cid[i][1];
   };
