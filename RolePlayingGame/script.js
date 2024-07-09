@@ -264,6 +264,7 @@ function pickEight() {
     pick(8);
 }
 
+// func
 function pick(guess) {
     const numbers = [];
     while (numbers.length < 10) {

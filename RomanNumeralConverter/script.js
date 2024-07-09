@@ -20,19 +20,19 @@ const inputChecker = (num) => {
 
   // roman dictionary
   const romanLookUp = {
-    M:1000,
-    CM:900,
-    D:500,
-    CD:400,
-    C:100,
-    XC:90,
-    L:50,
-    XL:40,
-    X:10,
-    IX:9,
-    V:5,
-    IV:4,
-    I:1
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
   }
 
   // loops through dictionary, storing the roman letters
@@ -54,10 +54,10 @@ const inputChecker = (num) => {
 
       // error checker
       if (userInput.value >= 4000) {
-    output.innerHTML = "Please enter a number less than or equal to 3999";
+        output.innerHTML = "Please enter a number less than or equal to 3999";
       } else {
-      // returns value
-      output.innerHTML = accumalator;
+        // returns value
+        output.innerHTML = accumalator;
       }
     }
   }

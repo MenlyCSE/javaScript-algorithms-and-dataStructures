@@ -16,4 +16,5 @@ const checkText = () => {
   }
 };
 
+// listener
 checkButton.addEventListener("click", checkText);

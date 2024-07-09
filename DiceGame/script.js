@@ -14,8 +14,8 @@ let diceValuesArr = [];
 let isModalShowing = false;
 let score = 0;
 let totalScore = 0;
-let round = 1; 
-let rolls = 0; 
+let round = 1;
+let rolls = 0;
 
 const rollDice = () => {
   diceValuesArr = [];
@@ -109,7 +109,7 @@ const checkForStraights = (arr) => {
   const smallStraightsArr = ["1234", "2345", "3456"];
   const largeStraightsArr = ["12345", "23456"];
 
- if (smallStraightsArr.some(straight => uniqueNumbersStr.includes(straight))) {
+  if (smallStraightsArr.some(straight => uniqueNumbersStr.includes(straight))) {
     updateRadioOption(3, 30);
   }
 
@@ -161,7 +161,7 @@ rollDiceBtn.addEventListener("click", () => {
     updateStats();
     getHighestDuplicates(diceValuesArr);
     detectFullHouse(diceValuesArr);
-checkForStraights(diceValuesArr);
+    checkForStraights(diceValuesArr);
   }
 });
 

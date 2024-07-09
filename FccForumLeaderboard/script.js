@@ -95,6 +95,7 @@ const fetchData = async () => {
   }
 };
 
+// fetch func
 fetchData();
 
 const showLatestPosts = (data) => {

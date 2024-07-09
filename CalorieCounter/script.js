@@ -96,6 +96,7 @@ function clearForm() {
   output.classList.add('hide');
 }
 
+// listeners
 addEntryButton.addEventListener("click", addEntry);
 calorieCounter.addEventListener("submit", calculateCalories);
 clearButton.addEventListener('click', clearForm);

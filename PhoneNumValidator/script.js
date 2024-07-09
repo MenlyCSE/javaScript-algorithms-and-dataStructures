@@ -34,7 +34,6 @@ const checkBtnChecker = () => {
   }
 }
 
-
 // check
 checkBtn.addEventListener('click', checkBtnChecker)
 

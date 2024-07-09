@@ -23,8 +23,8 @@ dateOptionsSelectElement.addEventListener("change", () => {
     case "mm-dd-yyyy-h-mm":
       currentDateParagraph.textContent = `${month}-${day}-${year} ${hours} Hours ${minutes} Minutes`;
       break;
-    default: 
+    default:
       currentDateParagraph.textContent = formattedDate;
-    
+
   }
 });
