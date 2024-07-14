@@ -26,6 +26,17 @@ const validator = () => {
       console.log("Name:", name);
       console.log("ID:", id);
       console.log("URL:", url);
+      console.log("");
+      // test ID: 40
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          console.log("");
+        })
+        .catch(error => console.log("Inner:", error));
+
     })
     .catch(error => console.log(error));
 }
@@ -34,6 +45,6 @@ const validator = () => {
 searchBtn.addEventListener('click', validator);
 searchInput.addEventListener('keydown', event => {
   if (event.key === 'Enter') {
-    validator();
+    validator;
   }
 });
