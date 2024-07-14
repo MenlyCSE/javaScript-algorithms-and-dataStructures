@@ -22,17 +22,21 @@ const validator = () => {
     .then(response => response.json())
     .then(data => {
       const { results } = data;
-      const { name, url, id } = results[idSearch];
-      console.log("Name:", name);
-      console.log("ID:", id);
-      console.log("URL:", url);
-      console.log("");
-      // test ID: 40
+      const { url } = results[idSearch];
 
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          console.log(data)
+
+          const { name, weight, id, base_experience, height, order, stats } = data;
+          const { base_stat } = stats;
+          pokemonName.textContent = `${name.toUpperCase()} #${id}`; 
+
+          console.log(base_stat);
+          stats.forEach(() => {
+            console.log(base_stat)
+          })
+
           console.log("");
         })
         .catch(error => console.log("Inner:", error));
