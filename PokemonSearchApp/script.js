@@ -2,15 +2,15 @@ const searchInput = document.getElementById('search-input');
 const searchBtn = document.getElementById('search-button');
 const pokemonName = document.getElementById('pokemon-name');
 const pokemonId = document.getElementById('pokemon-id');
-const weight = document.getElementById('weight');
-const height = document.getElementById('height');
-const types = document.getElementById('types');
-const hp = document.getElementById('hp');
-const attack = document.getElementById('attack');
-const defense = document.getElementById('defense');
-const specialAttack = document.getElementById('special-attack');
-const specialDefense = document.getElementById('special-defense');
-const speed = document.getElementById('speed');
+const pokemonWeight = document.getElementById('weight');
+const pokemonHeight = document.getElementById('height');
+const pokemonTypes = document.getElementById('types');
+const pokemonHp = document.getElementById('hp');
+const pokemonAttack = document.getElementById('attack');
+const pokemonDefense = document.getElementById('defense');
+const pokemonSpAttack = document.getElementById('special-attack');
+const pokemonSpDefense = document.getElementById('special-defense');
+const pokemonSpeed = document.getElementById('speed');
 
 const validator = () => {
   const pokeURL = 'https://pokeapi-proxy.freecodecamp.rocks/api/pokemon';
@@ -21,26 +21,31 @@ const validator = () => {
   fetch(pokeURL)
     .then(response => response.json())
     .then(data => {
+
+      // destructs
       const { results } = data;
-      const { url } = results[idSearch];
+      const { url, name, id } = results[idSearch];
+
+      // assign values
+      pokemonName.textContent = `${name.toUpperCase()} #${id}`;
+
 
       fetch(url)
         .then(response => response.json())
         .then(data => {
 
-          const { name, weight, id, base_experience, height, order, stats } = data;
-          const { base_stat } = stats;
-          pokemonName.textContent = `${name.toUpperCase()} #${id}`; 
+          // destructs
+          const { weight, height, types } = data;
 
-          console.log(base_stat);
-          stats.forEach(() => {
-            console.log(base_stat)
-          })
+          // assign values
+          pokemonWeight.textContent = `Weight: ${weight}`;
+          pokemonHeight.textContent = `Height: ${height}`;
 
-          console.log("");
+          types.forEach((slot) => {
+            pokemonTypes.innerHTML += `<span class="type ${slot.type.name}">${slot.type.name}</span>`;
+          });
         })
         .catch(error => console.log("Inner:", error));
-
     })
     .catch(error => console.log(error));
 }
